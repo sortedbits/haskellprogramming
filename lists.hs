@@ -41,3 +41,19 @@ eftInt' i1 i2 = eftPoly i1 i2
 
 eftChar' :: Char -> Char -> [Char]
 eftChar' c1 c2 = eftPoly c1 c2
+
+
+
+-- implement string tokenizer using takeWhile and dropWhile
+
+tokenizeSpc :: [Char] -> [[Char]]
+tokenizeSpc []         = []
+tokenizeSpc (' ' : xs) = tokenizeSpc xs
+tokenizeSpc xs         = (takeWhile notSpace xs) : (tokenizeSpc $ dropWhile notSpace xs)
+  where notSpace = (/= ' ')
+
+tokenizeNl :: [Char] -> [[Char]]
+tokenizeNl []         = []
+tokenizeNl ('\n' : xs) = tokenizeNl xs
+tokenizeNl xs         = (takeWhile notNl xs) : (tokenizeNl $ dropWhile notNl xs)
+  where notNl= (/= '\n')   
