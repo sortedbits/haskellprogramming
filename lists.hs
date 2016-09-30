@@ -43,17 +43,32 @@ eftChar' :: Char -> Char -> [Char]
 eftChar' c1 c2 = eftPoly c1 c2
 
 
-
 -- implement string tokenizer using takeWhile and dropWhile
 
-tokenizeSpc :: [Char] -> [[Char]]
-tokenizeSpc []         = []
-tokenizeSpc (' ' : xs) = tokenizeSpc xs
-tokenizeSpc xs         = (takeWhile notSpace xs) : (tokenizeSpc $ dropWhile notSpace xs)
+myWords :: [Char] -> [[Char]]
+myWords []         = []
+myWords (' ' : xs) = myWords xs
+myWords xs         = (takeWhile notSpace xs) : (myWords $ dropWhile notSpace xs)
   where notSpace = (/= ' ')
 
-tokenizeNl :: [Char] -> [[Char]]
-tokenizeNl []         = []
-tokenizeNl ('\n' : xs) = tokenizeNl xs
-tokenizeNl xs         = (takeWhile notNl xs) : (tokenizeNl $ dropWhile notNl xs)
-  where notNl= (/= '\n')   
+myLines :: [Char] -> [[Char]]
+myLines []         = []
+myLines ('\n' : xs) = myLines xs
+myLines xs         = (takeWhile notNl xs) : (myLines $ dropWhile notNl xs)
+  where notNl= (/= '\n')
+
+-- alternatively
+
+tokenize :: Char -> [Char] -> [[Char]]
+tokenize sep xs =
+  case xs of
+    []       -> []
+    (x : zs) ->
+      if x == sep
+        then tokenize sep zs
+        else (takeWhile notSep xs) : (tokenize sep  $ dropWhile notSep xs)
+          where notSep = (/= sep)
+
+myWords' xs = tokenize ' ' xs
+
+myLines' xs = tokenize '\n' xs
