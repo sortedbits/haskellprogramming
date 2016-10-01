@@ -60,14 +60,14 @@ myLines xs         = (takeWhile notNl xs) : (myLines $ dropWhile notNl xs)
 -- alternatively
 
 tokenize :: Char -> [Char] -> [[Char]]
-tokenize sep xs =
-  case xs of
-    []       -> []
-    (x : zs) ->
-      if x == sep
-        then tokenize sep zs
-        else (takeWhile notSep xs) : (tokenize sep  $ dropWhile notSep xs)
-          where notSep = (/= sep)
+tokenize sep [] = []
+tokenize sep xs
+  | z == sep  = tokenize sep zs
+  | otherwise = (takeWhile notSep xs) : (tokenize sep  $ dropWhile notSep xs)
+  where
+    (z : zs) = xs
+    notSep =  (/= sep)
+
 
 myWords' xs = tokenize ' ' xs
 
