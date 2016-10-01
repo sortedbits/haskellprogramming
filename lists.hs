@@ -1,4 +1,6 @@
 
+-- EnumFromTo
+
 -- implement enumFromTo, do not use ..
 
 eftBool :: Bool -> Bool -> [Bool]
@@ -43,6 +45,8 @@ eftChar' :: Char -> Char -> [Char]
 eftChar' c1 c2 = eftPoly c1 c2
 
 
+-- Thy Fearful Symmetry
+
 -- implement string tokenizer using takeWhile and dropWhile
 
 myWords :: [Char] -> [[Char]]
@@ -72,3 +76,17 @@ tokenize sep xs
 myWords' xs = tokenize ' ' xs
 
 myLines' xs = tokenize '\n' xs
+
+
+-- Comprehend Thy Lists
+
+mySqr = [x^2 | x <- [1..5]]
+
+c1 = [x | x <- mySqr, rem x 2 == 0]
+
+c2 = [(x, y) | x <- mySqr, y <- mySqr, x < 50, y > 50]
+
+c3 = take 5 [ (x, y) | x <- mySqr, y <- mySqr, x < 50, y > 50 ]
+
+
+-- Square Cube
