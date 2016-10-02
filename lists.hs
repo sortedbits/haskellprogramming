@@ -1,7 +1,6 @@
 import Data.Char
 
 -- EnumFromTo
-
 -- implement enumFromTo, do not use ..
 
 eftBool :: Bool -> Bool -> [Bool]
@@ -47,7 +46,6 @@ eftChar' c1 c2 = eftPoly c1 c2
 
 
 -- Thy Fearful Symmetry
-
 -- implement string tokenizer using takeWhile and dropWhile
 
 myWords :: [Char] -> [[Char]]
@@ -102,36 +100,26 @@ lenSqrCube' = length sqrCube'
 
 
 -- Bottom Madness
-
 -- bottom?
 
 bm1 = [x^y | x <- [1..5], y <- [2, undefined]]
 -- y
-
 bm2 = take 1 $ [x^y | x <- [1..5], y <- [2, undefined]]
 -- n
-
 bm3 = sum [1, undefined, 3]
 -- y
-
 bm4 = length [1, 2, undefined]
 -- n
-
 bm5 = length $ [1, 2, 3] ++ undefined
 -- y
-
 bm6 = take 1 $ filter even [1, 2, 3, undefined]
 -- n
-
 bm7 = take 1 $ filter even [1, 3, undefined]
 -- y
-
 bm8 = take 1 $ filter odd [1, 3, undefined]
 -- n
-
 bm9 = take 2 $ filter odd [1, 3, undefined]
 -- n
-
 bm10 = take 3 $ filter odd [1, 3, undefined]
 -- y
 
@@ -140,22 +128,16 @@ bm10 = take 3 $ filter odd [1, 3, undefined]
 
 -- [1, 2, 3, 4, 5]
 -- nf (and whnf)
-
 -- 1 : 2 : 3 : 4 : _
 -- whnf
-
 -- enumFromTo 1 10
 -- none
-
 -- length [1, 2, 3, 4, 5]
 -- none
-
 -- sum (enumFromTo 1 10)
 -- none
-
 -- ['a'..'m'] ++ ['n'..'z']
---none
-
+-- none
 -- (_, 'b')
 -- whnf
 
