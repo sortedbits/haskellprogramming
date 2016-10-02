@@ -1,3 +1,4 @@
+import Data.Char
 
 -- EnumFromTo
 
@@ -90,3 +91,40 @@ c3 = take 5 [ (x, y) | x <- mySqr, y <- mySqr, x < 50, y > 50 ]
 
 
 -- Square Cube
+
+myCube = [y^3 | y <- [1..5]]
+
+sqrCube = [(x, y) | x <- mySqr, y <- myCube]
+
+sqrCube' = [(x, y) | x <- mySqr, y <- myCube, x <50, y < 50]
+
+lenSqrCube' = length sqrCube'
+
+
+-- Bottom Madness
+
+-- TODO
+
+
+-- Data.Char
+
+capitalize' :: [Char] -> [Char]
+capitalize' [] = []
+capitalize' (x : xs) = toUpper x : xs
+    
+allUpper :: [Char] -> [Char]
+allUpper [] = []
+allUpper (x : xs) = toUpper x : allUpper xs
+
+firstUpper :: [Char] -> Char
+firstUpper xs = toUpper $ head xs 
+
+firstUpper' :: [Char] -> Char
+firstUpper' xs = toUpper . head $ xs
+
+firstUpperPF = toUpper . head
+
+
+-- Ciphers
+
+-- TODO
