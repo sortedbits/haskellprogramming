@@ -193,6 +193,18 @@ myAbs :: (Num a, Ord a) => [a] -> [a]
 myAbs xs = map (\x -> bool x (-x) (x < 0)) xs 
 
 
+-- Filtering
+
+multOfThree :: (Integral a) => [a] -> [a]
+multOfThree xs = [x | x <- xs,  (rem x 3) == 0]
+
+lenMultOfThreePF :: (Integral a) => [a] -> Int
+lenMultOfThreePF = length . multOfThree
+
+noArticles :: [Char] -> [[Char]]
+noArticles = filter (\x -> x /= "a" && x /= "an") . words
+
+
 -- Ciphers
 
 -- TODO
