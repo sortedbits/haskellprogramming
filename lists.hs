@@ -1,4 +1,5 @@
 import Data.Char
+import Data.Bool
 
 -- EnumFromTo
 -- implement enumFromTo, do not use ..
@@ -159,6 +160,37 @@ firstUpper' :: [Char] -> Char
 firstUpper' xs = toUpper . head $ xs
 
 firstUpperPF = toUpper . head
+
+
+-- More Bottoms
+-- bottom?
+
+b11 = take 1 $ map (+1) [undefined, 2, 3]
+-- y
+b12 = take 1 $ map (+1) [1, undefined, 3]
+-- n
+b13 = take 2 $ map (+1) [1, undefined, 3]
+-- y
+
+itIsMystery :: [Char] -> [Bool]
+itIsMystery xs = map (\x -> elem x "aeiou") xs
+-- itIsMystery "hello" = [False, True, False, False, True]
+
+r1 = map (^2) [1..10]
+-- [1,4,9,16,25,36,49,64,81,100]
+
+r2 = map minimum [[1..10], [10..20], [20..30]]
+-- [1,10,20]
+
+r3 = map sum [[1..5], [1..5], [1..5]]
+-- [15,15,15]
+
+-- function bool not in Data.Bool 
+bool :: a -> a -> Bool -> a
+bool x y p = if p then y else x
+
+myAbs :: (Num a, Ord a) => [a] -> [a]
+myAbs xs = map (\x -> bool x (-x) (x < 0)) xs 
 
 
 -- Ciphers
