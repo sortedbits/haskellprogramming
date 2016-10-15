@@ -289,7 +289,7 @@ myMinimumBy f (x : xs) = go f xs x
           | otherwise   = go f xs z 
 
 myMaximum :: (Ord a) => [a] -> a
-myMaximum xs  = myMaximumBy compare xs
+myMaximum xs = myMaximumBy compare xs
 
 myMinimum :: (Ord a) => [a] -> a
 myMinimum xs = myMinimumBy compare xs
