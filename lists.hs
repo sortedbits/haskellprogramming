@@ -221,3 +221,75 @@ myZip' :: [a] -> [b] -> [(a, b)]
 myZip' = myZipWith (\x y -> (x, y))
 
 
+-- My Standard Functions
+
+-- direct recursion, not using (&&)
+myAnd :: [Bool] -> Bool
+myAnd []     = True
+myAnd (x:xs) = if x == False then False else myAnd xs
+
+-- direct recursion, using (&&)
+myAnd' :: [Bool] -> Bool
+myAnd' []     = True
+myAnd' (x:xs) = x && myAnd' xs
+
+myOr :: [Bool] -> Bool
+myOr []       = False
+myOr (x : xs) = if x then True else myOr xs
+
+myOr' :: [Bool] -> Bool
+myOr' []       = False
+myOr' (x : xs) = x ||  myOr' xs
+
+myAny :: (a -> Bool) -> [a] -> Bool
+myAny f []       = False
+myAny f (x : xs) = f x || myAny f xs
+
+myElem :: Eq a => a -> [a] -> Bool
+myElem x []       = False
+myElem x (y : ys) = (x == y) || myElem x ys
+
+myElem' :: Eq a => a -> [a] -> Bool
+myElem' x ys = myAny (== x) ys
+
+myReverse :: [a] -> [a]
+myReverse []       = []
+myReverse (x : xs) = myReverse xs ++ (x : [])
+
+squish :: [[a]] -> [a]
+squish xs = go xs []
+  where
+    go :: [[a]] -> [a] -> [a]
+    go [] zs       = zs
+    go (x : xs) zs = x ++ go xs []
+
+squishMap :: (a -> [b]) -> [a] -> [b]
+squishMap f []       = []
+squishMap f (x : xs) = (f x) ++ squishMap f xs
+
+squishAgain :: [[a]] -> [a]
+squishAgain xss = squishMap id xss 
+
+myMaximumBy :: (a -> a -> Ordering) -> [a] -> a
+myMaximumBy f [] = error "empty list"
+myMaximumBy f (x : xs) = go f xs x 
+  where go :: (a -> a -> Ordering) -> [a] -> a -> a
+        go f [] z       = z
+        go f (x : xs) z
+          | f x z == GT = go f xs x
+          | otherwise   = go f xs z
+
+myMinimumBy :: (a -> a -> Ordering) -> [a] -> a
+myMinimumBy f [] = error "empty list"
+myMinimumBy f (x : xs) = go f xs x
+  where go :: (a -> a -> Ordering) -> [a] -> a -> a
+        go f [] z       = z
+        go f (x : xs) z
+          | f x z == LT = go f xs x
+          | otherwise   = go f xs z 
+
+myMaximum :: (Ord a) => [a] -> a
+myMaximum xs  = myMaximumBy compare xs
+
+myMinimum :: (Ord a) => [a] -> a
+myMinimum xs = myMinimumBy compare xs
